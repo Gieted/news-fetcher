@@ -7,6 +7,7 @@ import pl.gieted.news_fetcher.ExceptionHandler;
 import pl.gieted.news_fetcher.ParametersEncoder;
 import pl.gieted.news_fetcher.fetchers.Fetcher;
 import pl.gieted.news_fetcher.fetchers.OkHttpFetcher;
+import pl.gieted.news_fetcher.fetchers.PlainJavaFetcher;
 import pl.gieted.news_fetcher.news.ClassicalNewsService;
 import pl.gieted.news_fetcher.news.NewsApi;
 import pl.gieted.news_fetcher.news.NewsDatabase;
@@ -35,6 +36,10 @@ public class ApplicationComponent {
 
     private OkHttpFetcher okHttpFetcher() {
         return new OkHttpFetcher(okHttpClient());
+    }
+
+    private PlainJavaFetcher plainJavaFetcher() {
+        return new PlainJavaFetcher();
     }
 
     private Fetcher fetcher() {
