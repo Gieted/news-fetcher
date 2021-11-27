@@ -3,6 +3,7 @@ package pl.gieted.news_fetcher;
 import java.io.IOException;
 import java.net.SocketTimeoutException;
 import java.net.UnknownHostException;
+import java.nio.file.Path;
 
 public final class ExceptionHandler {
     private final boolean isDevModeEnabled;
@@ -65,5 +66,15 @@ public final class ExceptionHandler {
     public void onApiKeyAbsent() {
         System.err.println("Please provide an api key");
         System.exit(107);
+    }
+
+    public void onArticlesPathIsDirectory(String path) {
+        System.err.printf("Provided path is a directory: %s\n", path);
+        System.exit(108);
+    }
+
+    public void onInvalidArticlesPath(String path) {
+        System.err.printf("An invalid path was provided: %s\n", path);
+        System.exit(109);
     }
 }

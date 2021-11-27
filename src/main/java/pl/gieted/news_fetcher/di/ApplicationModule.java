@@ -25,8 +25,8 @@ public final class ApplicationModule {
         return  System.getenv("API_KEY");
     }
 
-    public Path provideArticlesFilePath() {
-        return Paths.get(".", "articles.txt");
+    public String provideDefaultArticlesPath() {
+        return Paths.get(".", "articles.txt").toString();
     }
 
     public boolean provideIsDevModeEnabled() {

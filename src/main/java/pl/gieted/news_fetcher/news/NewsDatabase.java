@@ -4,18 +4,17 @@ import org.jetbrains.annotations.NotNull;
 
 import java.io.*;
 import java.nio.charset.StandardCharsets;
-import java.nio.file.Path;
 import java.util.List;
 
 public final class NewsDatabase {
-    private final Path path;
+    private final String path;
 
-    public NewsDatabase(@NotNull Path path) {
+    public NewsDatabase(@NotNull String path) {
         this.path = path;
     }
 
     public void saveArticles(@NotNull List<Article> articles) throws IOException {
-        FileOutputStream fileOutputStream = new FileOutputStream(path.toFile());
+        FileOutputStream fileOutputStream = new FileOutputStream(path);
         OutputStreamWriter outputStreamWriter = new OutputStreamWriter(fileOutputStream, StandardCharsets.UTF_8);
         try (BufferedWriter writer = new BufferedWriter(outputStreamWriter)) {
             for (Article article : articles) {

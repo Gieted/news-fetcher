@@ -13,10 +13,26 @@ import pl.gieted.news_fetcher.news.NewsApi;
 import pl.gieted.news_fetcher.news.NewsDatabase;
 import pl.gieted.news_fetcher.news.RetrofitNewsService;
 
-import java.nio.file.Path;
-
 public final class ApplicationComponent {
+
+    private final String articlesPath;
     private final ApplicationModule module = new ApplicationModule();
+    
+    public ApplicationComponent(String articlesPath) {
+        this.articlesPath = articlesPath;
+    }
+
+    private String defaultArticlesPath() {
+        return module.provideDefaultArticlesPath();
+    }
+
+    private String articlesPath() {
+        if (articlesPath != null) {
+            return articlesPath;
+        } else {
+            return defaultArticlesPath();
+        }
+    }
 
     private String apiKey() {
         return module.provideApiKey();
@@ -59,13 +75,9 @@ public final class ApplicationComponent {
     }
 
     private NewsDatabase newsDatabase() {
-        return new NewsDatabase(newsDatabasePath());
+        return new NewsDatabase(articlesPath());
     }
-
-    private Path newsDatabasePath() {
-        return module.provideArticlesFilePath();
-    }
-
+    
     private boolean isDevModeEnabled() {
         return module.provideIsDevModeEnabled();
     }
