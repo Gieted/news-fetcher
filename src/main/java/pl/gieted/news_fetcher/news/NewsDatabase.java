@@ -7,7 +7,7 @@ import java.nio.charset.StandardCharsets;
 import java.nio.file.Path;
 import java.util.List;
 
-public class NewsDatabase {
+public final class NewsDatabase {
     private final Path path;
 
     public NewsDatabase(@NotNull Path path) {

@@ -15,7 +15,7 @@ import pl.gieted.news_fetcher.news.RetrofitNewsService;
 
 import java.nio.file.Path;
 
-public class ApplicationComponent {
+public final class ApplicationComponent {
     private final ApplicationModule module = new ApplicationModule();
 
     private String apiKey() {

@@ -10,7 +10,7 @@ import retrofit2.http.Query;
 
 import java.io.IOException;
 
-public class RetrofitNewsService implements NewsApi {
+public final class RetrofitNewsService implements NewsApi {
 
 
     public interface Service {

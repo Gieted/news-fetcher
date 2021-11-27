@@ -4,7 +4,7 @@ import java.io.IOException;
 import java.net.SocketTimeoutException;
 import java.net.UnknownHostException;
 
-public class ExceptionHandler {
+public final class ExceptionHandler {
     private final boolean isDevModeEnabled;
 
     public ExceptionHandler(boolean isDevModeEnabled) {

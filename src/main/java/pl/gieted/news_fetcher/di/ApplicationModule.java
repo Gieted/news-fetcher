@@ -8,7 +8,7 @@ import pl.gieted.news_fetcher.news.NewsApi;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 
-public class ApplicationModule {
+public final class ApplicationModule {
     
     public Gson provideGson() {
         RuntimeTypeAdapterFactory<NewsApi.Response> runtimeTypeAdapterFactory = RuntimeTypeAdapterFactory
