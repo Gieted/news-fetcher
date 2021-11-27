@@ -7,7 +7,6 @@ import pl.gieted.news_fetcher.news.NewsApi;
 
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.Optional;
 
 public class ApplicationModule {
     
@@ -23,14 +22,7 @@ public class ApplicationModule {
     }
 
     public String provideApiKey() {
-        String apiKey = System.getenv("API_KEY");
-        
-        if (apiKey == null) {
-            System.err.println("Please provide api key");
-            System.exit(101);
-        }
-        
-        return apiKey;
+        return  System.getenv("API_KEY");
     }
 
     public Path provideArticlesFilePath() {

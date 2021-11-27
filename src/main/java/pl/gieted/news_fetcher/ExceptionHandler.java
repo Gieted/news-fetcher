@@ -17,6 +17,7 @@ public class ExceptionHandler {
         } else {
             System.err.printf("The file cannot be saved: %s.\n", e.getMessage());
         }
+        System.exit(1);
     }
 
     public void onUnknownHost(UnknownHostException e) {
@@ -25,6 +26,7 @@ public class ExceptionHandler {
         } else {
             System.err.println("Check your internet connection.");
         }
+        System.exit(1);
     }
 
     public void onConnectionTimeout(SocketTimeoutException e) {
@@ -33,6 +35,7 @@ public class ExceptionHandler {
         } else {
             System.err.println("The NewsAPI is down or you don't have an internet connection.");
         }
+        System.exit(1);
     }
 
     public void onUnknownExceptionWhileFetchingArticles(Exception e) {
@@ -41,6 +44,7 @@ public class ExceptionHandler {
         } else {
             System.err.println("An unknown error have happened while trying to download the articles.");
         }
+        System.exit(1);
     }
 
     public void onUnknownExceptionWhileSavingArticles(Exception e) {
@@ -49,10 +53,17 @@ public class ExceptionHandler {
         } else {
             System.err.println("An unknown error have happened while trying to save the articles.");
         }
+        System.exit(1);
     }
 
     public void onNewsApiError(String message) {
         System.err.println("NewsAPI have returned an error:");
         System.err.println(message);
+        System.exit(1);
+    }
+
+    public void onApiKeyAbsent() {
+        System.err.println("Please provide an api key");
+        System.exit(1);
     }
 }

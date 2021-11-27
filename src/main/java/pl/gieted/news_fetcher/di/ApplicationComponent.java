@@ -75,6 +75,6 @@ public class ApplicationComponent {
     }
     
     public Application application() {
-        return new Application(newsApi(), newsDatabase(), exceptionHandler());
+        return new Application(newsApi(), newsDatabase(), exceptionHandler(), apiKey());
     }
 }

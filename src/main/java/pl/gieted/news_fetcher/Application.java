@@ -1,6 +1,7 @@
 package pl.gieted.news_fetcher;
 
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 import pl.gieted.news_fetcher.di.ApplicationComponent;
 import pl.gieted.news_fetcher.news.NewsApi;
 import pl.gieted.news_fetcher.news.NewsDatabase;
@@ -15,20 +16,30 @@ public final class Application {
         ApplicationComponent component = new ApplicationComponent();
         Application application = component.application();
 
+        application.ensureApiKeyIsPresent();
         application.downloadAndSaveArticles();
     }
 
     private final NewsApi newsApi;
     private final NewsDatabase newsDatabase;
     private final ExceptionHandler exceptionHandler;
+    private final String apiKey;
 
     public Application(@NotNull NewsApi newsApi,
                        @NotNull NewsDatabase newsDatabase,
-                       @NotNull ExceptionHandler exceptionHandler) {
+                       @NotNull ExceptionHandler exceptionHandler,
+                       @Nullable String apiKey) {
 
         this.newsApi = newsApi;
         this.newsDatabase = newsDatabase;
         this.exceptionHandler = exceptionHandler;
+        this.apiKey = apiKey;
+    }
+
+    public void ensureApiKeyIsPresent() {
+        if (apiKey == null) {
+            exceptionHandler.onApiKeyAbsent();
+        }
     }
 
     public void downloadAndSaveArticles() {
