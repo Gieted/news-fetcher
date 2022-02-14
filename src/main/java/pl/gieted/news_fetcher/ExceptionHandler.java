@@ -1,11 +1,8 @@
 package pl.gieted.news_fetcher;
 
-import com.google.gson.JsonSyntaxException;
-
 import java.io.IOException;
 import java.net.SocketTimeoutException;
 import java.net.UnknownHostException;
-import java.nio.file.Path;
 
 public final class ExceptionHandler {
     private final boolean isDevModeEnabled;
