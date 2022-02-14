@@ -1,7 +1,9 @@
 package pl.gieted.news_fetcher.news;
 
 import com.google.gson.Gson;
+import com.google.gson.JsonSyntaxException;
 import org.jetbrains.annotations.NotNull;
+import pl.gieted.news_fetcher.ExceptionHandler;
 import pl.gieted.news_fetcher.ParametersEncoder;
 import pl.gieted.news_fetcher.fetchers.Fetcher;
 
@@ -15,12 +17,19 @@ public final class ClassicalNewsService implements NewsApi {
     private final ParametersEncoder parametersEncoder;
     private final Gson gson;
     private final Fetcher fetcher;
+    private final ExceptionHandler exceptionHandler;
 
-    public ClassicalNewsService(@NotNull String apiKey, @NotNull ParametersEncoder parametersEncoder, @NotNull Gson gson, @NotNull Fetcher fetcher) {
+    public ClassicalNewsService(@NotNull String apiKey,
+                                @NotNull ParametersEncoder parametersEncoder,
+                                @NotNull Gson gson,
+                                @NotNull Fetcher fetcher,
+                                @NotNull ExceptionHandler exceptionHandler) {
+        
         this.apiKey = apiKey;
         this.parametersEncoder = parametersEncoder;
         this.gson = gson;
         this.fetcher = fetcher;
+        this.exceptionHandler = exceptionHandler;
     }
 
     @Override
@@ -31,7 +40,14 @@ public final class ClassicalNewsService implements NewsApi {
         parameters.put("category", category.toString());
 
         String responseData = fetcher.fetch(BASE_URL + "top-headlines" + parametersEncoder.encode(parameters));
-        
-        return gson.fromJson(responseData, Response.class);
+
+        try {
+            return gson.fromJson(responseData, Response.class);
+        } catch (JsonSyntaxException e) {
+            exceptionHandler.onMalformedJson();
+            
+            // Needed for the compiler
+            return null;
+        }
     }
 }

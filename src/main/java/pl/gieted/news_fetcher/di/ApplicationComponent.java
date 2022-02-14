@@ -63,7 +63,7 @@ public final class ApplicationComponent {
     }
 
     private ClassicalNewsService classicalNewsService() {
-        return new ClassicalNewsService(apiKey(), parametersEncoder(), gson(), fetcher()); 
+        return new ClassicalNewsService(apiKey(), parametersEncoder(), gson(), fetcher(), exceptionHandler()); 
     }
 
     private RetrofitNewsService retrofitNewsService() {

@@ -1,5 +1,7 @@
 package pl.gieted.news_fetcher;
 
+import com.google.gson.JsonSyntaxException;
+
 import java.io.IOException;
 import java.net.SocketTimeoutException;
 import java.net.UnknownHostException;
@@ -76,5 +78,10 @@ public final class ExceptionHandler {
     public void onInvalidArticlesPath(String path) {
         System.err.printf("An invalid path was provided: %s\n", path);
         System.exit(109);
+    }
+
+    public void onMalformedJson() {
+        System.err.println("Cannot understand NewsAPI's response");
+        System.exit(110);
     }
 }
